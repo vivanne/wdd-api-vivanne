@@ -1,0 +1,165 @@
+{
+  "currentlyReading": [
+    {
+      "id": "G5tgDQAAQBAJ",
+      "title": "Tower of Dawn",
+      "authors": "Sarah J. Maas",
+      "thumbnail": "http://books.google.com/books/content?id=G5tgDQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "pageCount": 432,
+      "dateRead": null,
+      "currentPage": 120
+    },
+    {
+      "id": "ZhZjCwAAQBAJ",
+      "title": "Empire of Storms",
+      "authors": "Sarah J. Maas",
+      "thumbnail": "http://books.google.com/books/content?id=ZhZjCwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "pageCount": "724",
+      "currentPage": 0,
+      "genre": [],
+      "dateRead": null
+    },
+    {
+      "id": "ceRIDwAAQBAJ",
+      "title": "Storm",
+      "authors": "Lucinda Riley",
+      "thumbnail": "http://books.google.com/books/content?id=ceRIDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "pageCount": 0,
+      "dateRead": null
+    }
+  ],
+  "toRead": [
+    {
+      "id": "FixeEAAAQBAJ",
+      "title": "Toen winter zomer werd",
+      "authors": "Emily Henry",
+      "thumbnail": "http://books.google.com/books/content?id=FixeEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "pageCount": "265",
+      "currentPage": 0,
+      "genre": [],
+      "dateRead": null
+    },
+    {
+      "id": "nNqPEAAAQBAJ",
+      "title": "Het gefluister achter de deur",
+      "authors": "T.J. Klune",
+      "thumbnail": "http://books.google.com/books/content?id=nNqPEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "pageCount": "371",
+      "currentPage": 0,
+      "genre": [],
+      "dateRead": null
+    },
+    {
+      "id": "HRzdEAAAQBAJ",
+      "title": "Het boomhuis in het bos",
+      "authors": "T.J. Klune",
+      "thumbnail": "http://books.google.com/books/content?id=HRzdEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "pageCount": "365",
+      "currentPage": 0,
+      "genre": [],
+      "dateRead": null
+    },
+    {
+      "id": "FGQHEAAAQBAJ",
+      "title": "De Camino",
+      "authors": "Anya Niewierra",
+      "thumbnail": "http://books.google.com/books/content?id=FGQHEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "pageCount": "398",
+      "currentPage": 0,
+      "genre": [],
+      "dateRead": null
+    }
+  ],
+  "haveRead": [
+    {
+      "id": "luPvDAAAQBAJ",
+      "title": "De Da Vinci code",
+      "authors": "Dan Brown",
+      "thumbnail": "http://books.google.com/books/content?id=luPvDAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "pageCount": 353,
+      "currentPage": 0,
+      "genre": [
+        "Fiction / Action & Adventure",
+        "Fiction / Thrillers / General"
+      ]
+    },
+    {
+      "id": "_ag3DwAAQBAJ",
+      "title": "Als wij schurken waren",
+      "authors": "M.L. Rio",
+      "thumbnail": "http://books.google.com/books/content?id=_ag3DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "pageCount": 271,
+      "currentPage": 0,
+      "genre": [
+        "Fiction / General",
+        "Fiction / Literary",
+        "Fiction / Psychological",
+        "Fiction / Crime"
+      ]
+    },
+    {
+      "id": "i1G8EAAAQBAJ",
+      "title": "Binding 13",
+      "authors": "Chloe Walsh",
+      "thumbnail": "http://books.google.com/books/content?id=i1G8EAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "pageCount": 816,
+      "currentPage": 0,
+      "genre": [
+        "Fiction / Romance / New Adult",
+        "Fiction / Romance / Contemporary"
+      ]
+    },
+    {
+      "id": "sFG8EAAAQBAJ",
+      "title": "Keeping 13",
+      "authors": "Chloe Walsh",
+      "thumbnail": "http://books.google.com/books/content?id=sFG8EAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "pageCount": 832,
+      "currentPage": 0,
+      "genre": [
+        "Fiction / Romance / New Adult",
+        "Fiction / Romance / Contemporary"
+      ]
+    },
+    {
+      "id": "Uf82DwAAQBAJ",
+      "title": "De zeven zussen",
+      "authors": "Lucinda Riley",
+      "thumbnail": "http://books.google.com/books/content?id=Uf82DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "pageCount": "557",
+      "currentPage": 0,
+      "genre": [],
+      "dateRead": "2025-04-24"
+    },
+    {
+      "id": "I8ydHVJiobIC",
+      "title": "Throne of Glass",
+      "authors": "Sarah J. Maas",
+      "thumbnail": "http://books.google.com/books/content?id=I8ydHVJiobIC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "pageCount": "435",
+      "currentPage": 0,
+      "genre": [],
+      "dateRead": "2025-04-24"
+    },
+    {
+      "id": "khEPAwAAQBAJ",
+      "title": "De donkere kroon",
+      "authors": "Sarah J. Maas",
+      "thumbnail": "http://books.google.com/books/content?id=khEPAwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "pageCount": "399",
+      "currentPage": 0,
+      "genre": [],
+      "dateRead": "2025-04-24"
+    },
+    {
+      "id": "i49CAwAAQBAJ",
+      "title": "Heir of Fire",
+      "authors": "Sarah J. Maas",
+      "thumbnail": "http://books.google.com/books/content?id=i49CAwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "pageCount": "596",
+      "currentPage": 0,
+      "genre": [],
+      "dateRead": "2025-04-24"
+    }
+  ]
+}

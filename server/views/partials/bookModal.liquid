@@ -1,0 +1,40 @@
+<div class="modal" id="book-modal">
+  <div class="modal-content">
+
+  <div class="modal-img">
+    {% if book.thumbnail %}
+      <img src="{{ book.thumbnail }}" alt="{{ book.title }}">
+  {% endif %}
+    </div>
+<div class="modal-info">
+<h2>{{ book.title }}</h2>
+<p>{{ book.authors | join: ", " }}</p>
+<p>{{ book.description }}</p>
+
+<a href="/book/{{ book.id }}" class="detail-link">Bekijk volledige boekpagina →</a>
+
+<form action="/move-book" method="POST" class="move-book-form">
+  <input type="hidden" name="book[id]" value="{{ book.id }}">
+  <input type="hidden" name="book[title]" value="{{ book.title }}">
+  <input type="hidden" name="book[authors]" value="{{ book.authors }}">
+  <input type="hidden" name="book[thumbnail]" value="{{ book.thumbnail }}">
+  <input type="hidden" name="fromShelf" value="{{ shelf.name }}">
+
+  <select name="toShelf" onchange="this.form.querySelector('.move-button').style.display = (this.value !== '{{ shelf.name }}') ? 'inline-block' : 'none';">
+    {% for option in shelfOptions %}
+      {% if option != shelf.name %}
+        <option value="{{ option }}">{{ option | capitalize }}</option>
+      {% else %}
+        <option value="{{ option }}" selected>{{ option | capitalize }}</option>
+      {% endif %}
+    {% endfor %}
+  </select>
+
+  <button type="submit" class="move-button" style="display: none;">Verplaats</button>
+</form>
+</div>
+
+<button id="close-modal">Sluit</button>
+  </div>
+</div>
+    

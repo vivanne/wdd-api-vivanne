@@ -1,0 +1,37 @@
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  width: 100vw;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 75vh;
+  padding: 2em 7em;
+  background-image: url("anime-style-cozy-home-interior-with-furnishings.jpg");
+
+  & h1 {
+    font-size: 8vmin;
+    color: white;
+    margin-top: 3em;
+
+  }
+
+  input {
+    border-radius: 50px;
+    padding: 1.5vmin 20vmin 1.5vmin 3vmin;
+    border: none;
+  }
+
+  button {
+    border-radius: 50px;
+    width: 5vmin;
+    height: 5vmin;
+    border: none;
+    background-color: #f0f0f0;
+  }
+}
+
+footer {
+  padding: 1rem;
+}

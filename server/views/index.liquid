@@ -1,0 +1,194 @@
+{% layout "server/layouts/base.liquid" %}
+
+{% assign title = "Home - Mijn Boekenapp" %}
+
+{% block head %}
+  <title>Home - Mijn Boekenapp</title>
+{% endblock %}
+
+{% block content %}
+{% assign booksThisYear = booksThisYear %}
+{% assign goal = goal %}
+{% assign percentage = booksThisYear | divided_by: goal | times: 100 %}
+{% assign circumference = 2 | times: 3.14159 | times: 54 %} <!-- Omtrek van de cirkel, r = 54 -->
+
+{% if showStats %}
+<section class="stats">
+  <div class="goal-container">
+<h3 class="stats-header">Goal: {{ goal }}</h3>
+  <canvas id="progressRing" width="120" height="120"
+  data-books-read="{{ booksThisYear }}"
+  data-goal="{{ goal }}">
+</canvas>
+  <p>Boeken gelezen: {{ booksThisYear }} van {{ goal }} dit jaar.</p>
+  <button id="edit-goal-button">Pas doel aan</button>
+
+  <!-- Formulier om doel aan te passen -->
+  <div class="goal-form" style="display: none;">
+    <form action="/update-goal" method="POST">
+      <label for="goal">Stel je jaardoel in (aantal boeken):</label>
+      <input type="number" id="goal" name="goal" value="{{ goal }}" min="1" required>
+      <button type="submit" class="edit-goal-button">Update doel</button>
+    </form>
+  </div>
+</div>
+
+<div class="genres-container">
+  <!-- Genre chart -->
+  <h3 class="stats-header">Meest Gelezen Genres</h3>
+  <canvas id="genreChart" width="300" height="300"></canvas>
+    <script>
+    window.genres = {{ genres | json }};
+    window.values = {{ values | json }};
+  </script>
+</div>
+
+<div class="author-container">
+  <!-- Genre chart -->
+  <h3 class="stats-header">Top 5 schrijvers</h3>
+  <canvas id="topAuthorsChart" width="300" height="300"></canvas>
+  <script>
+    window.topAuthorsNames = {{ topAuthorsNames | json }};
+    window.topAuthorsCounts = {{ topAuthorsCounts | json }};
+  </script>
+</div>
+</section>
+{% endif %}
+
+
+  <!-- Boekenplanken weergeven -->
+  <div class="bookshelves">
+    {% for shelf in shelves %}
+      <section class="shelf" data-shelf="{{ shelf.name | downcase }}">
+        <h2>{{ shelf.name | capitalize }}
+        <span class="book-count">{{ shelf.books.size }}</span>
+        </h2>
+        {% if shelf.books.size > 0 %}
+          {% if shelf.name == "haveRead" or shelf.name == "toRead" %}
+            <!-- "Have Read" en "To Read" planken krijgen dezelfde weergave -->
+            <ul class="bookshelf-3d" data-shelf="{{ shelf.name | downcase }}">
+              {% for book in shelf.books %}
+                <li>
+                  <a href="/book/{{ book.id }}" class="book-container">
+                    <div class="book">
+                      {% if book.thumbnail %}
+                        <img src="{{ book.thumbnail }}" alt="{{ book.title }}">
+                      {% endif %}
+                      <div class="book-spine">{{ book.title }}</div>
+                    </div>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% elsif shelf.name == "currentlyReading" %}
+            <!-- "Currently Reading" plank blijft apart in een section -->
+            <section class="currently-reading" data-shelf="{{ shelf.name | downcase }}">
+              <ul data-shelf="{{ shelf.name | downcase }}">
+                {% for book in shelf.books %}
+                  <li style="--progress: {{ book.progress | default: 0 }}%;">
+                    <div>
+                      {% if book.thumbnail %}
+                        <a href="/book/{{ book.id }}">
+                          <img src="{{ book.thumbnail }}" alt="{{ book.title }}">
+                        </a>
+                      {% endif %}
+                    </div>
+
+                    <div>
+                      <h3>{{ book.title }}</h3>
+                      <p>{{ book.authors }}</p>
+                      <p>Je hebt {{ book.currentPage }} van de {{ book.pageCount }} pagina's gelezen ({{ book.progress }}%).</p>
+                    </div>
+
+                    <form action="/move-book" method="POST" class="move-book-form">
+                      <input type="hidden" name="book[id]" value="{{ book.id }}">
+                      <input type="hidden" name="book[title]" value="{{ book.title }}">
+                      <input type="hidden" name="book[authors]" value="{{ book.authors }}">
+                      <input type="hidden" name="book[thumbnail]" value="{{ book.thumbnail }}">
+                      <input type="hidden" name="fromShelf" value="{{ shelf.name }}">
+
+                      <select name="toShelf" onchange="this.form.querySelector('.move-button').style.display = (this.value !== '{{ shelf }}') ? 'inline-block' : 'none';">
+                        {% for option in shelfOptions %}
+                          {% if option != shelf.name %}
+                            <option value="{{ option }}">{{ option | capitalize }}</option>
+                          {% else %}
+                            <option value="{{ option }}" selected>{{ option | capitalize }}</option>
+                          {% endif %}
+                        {% endfor %}
+                        <option value="remove">Verwijder</option> <!-- Verwijder optie toegevoegd -->
+                      </select>
+
+                      <button type="submit" class="move-button" style="display: none;">Verplaats</button>
+                    </form>
+                  </li>
+                {% endfor %}
+              </ul>
+            </section>
+          {% endif %}
+        {% else %}
+          <p>Geen boeken in deze plank.</p>
+        {% endif %}
+      </section>
+    {% endfor %}
+  </div>
+
+  {% if books and books.size > 0 %}
+    <a href="/" class="back-button">← Terug naar overzicht</a>
+    <h2>Search Results</h2>
+    <ul class="ul-search">
+      {% for book in books %}
+        <li>
+          <div>
+            {% if book.thumbnail %}
+              <!-- Als er een thumbnail is, toon deze -->
+              <a href="/book/{{ book.id }}">
+                <img src="{{ book.thumbnail }}" alt="Thumbnail for {{ book.title }}">
+              </a>
+            {% else %}
+              <!-- Als er geen thumbnail is, toon de fallback afbeelding -->
+              <a href="/book/{{ book.id }}">
+                <img src="/client/images/no-image.png" alt="No Image Available for {{ book.title }}">
+              </a>
+            {% endif %}
+          </div>
+          <div>
+            <h3>{{ book.title }}</h3>
+            <p>Auteurs: {{ book.authors | join: ', ' }}</p>
+            <p>Pagina's: {{ book.pageCount }}</p>
+
+            <!-- Formulier om boek toe te voegen aan een plank -->
+            <form action="/add-to-shelf" method="POST" class="add-to-shelf-form">
+            <input type="hidden" name="book[id]" value="{{ book.id }}">
+            <input type="hidden" name="book[title]" value="{{ book.title }}">
+            <input type="hidden" name="book[authors]" value="{{ book.authors | join: ', ' }}">
+            {% if book.thumbnail %}
+              <input type="hidden" name="book[thumbnail]" value="{{ book.thumbnail }}">
+            {% endif %}
+            {% if book.pageCount %}
+              <input type="hidden" name="book[pageCount]" value="{{ book.pageCount }}">
+            {% endif %}
+            <input type="hidden" name="book[currentPage]" value="0">
+            <input type="hidden" name="book[genre]" value="{{ book.categories | join: ', ' }}">
+          
+            <select name="shelf" required>
+              <option value="currentlyReading">Currently Reading</option>
+              <option value="haveRead">Have Read</option>
+              <option value="toRead">To Read</option>
+            </select>
+          
+            <button type="submit" class="add-to-shelf-button">Voeg toe aan plank</button>
+          </form>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+  {% if search_query %}
+    <p>Geen boeken gevonden.</p>
+  {% endif %}
+  {% endif %}
+
+  <div id="modal-container"></div>
+
+
+{% endblock %}

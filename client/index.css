@@ -1,0 +1,677 @@
+/* global styles */
+@import 'reset.css';
+@import 'typography.css';
+
+/*.layout and view styling */
+@import '../server/layouts/base.css';
+@import '../server/views/index.css';
+
+/* component styling */
+@import '../server/components/card/card.css';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: black;
+  margin: 0 auto;
+  background-color: rgb(245, 243, 241);
+  overflow-x: hidden;
+  /* max-width: 90vw; */
+}
+ul {
+  display: flex;
+  margin-top: 1em;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  width: auto;
+  gap: 2vmin;
+  /* background-color: white; */
+  padding: 5vmin;
+  border-radius: 10px;
+  max-height: 90vh; /* of wat bij je ontwerp past */
+}
+
+/* ul:nth-of-type(2) li {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+} */
+
+ul li {
+  max-width: 20vw;
+  width: 100%;
+  /* flex: 0 0 20%; */
+
+}
+
+ul li img {
+  width: 20vmin;
+  height: auto;
+  border-radius: 5px;
+}
+
+.shelf{
+  padding-top: 5rem;
+  padding-left: 0;
+}
+
+.shelf[data-shelf="currentlyreading"] {
+  /* background-image: linear-gradient(to right, #425b1c, rgb(247, 141, 42)); */
+  background-image: url('./images/Freebie-GradientTextures-Preview-04.webp');
+  background-position: right top;
+  padding: 6rem 10rem;
+  min-height: 70vh;
+
+  color: white;
+
+  & h2 {
+    color: white;
+    padding-left: 0;
+    margin-bottom: 2em;
+  }
+  
+}
+
+.shelf[data-shelf="haveread"] {
+  background-color: rgb(245, 243, 241);
+}
+
+.shelf[data-shelf="toread"] {
+  background-color: rgb(245, 243, 241);
+}
+
+ul[data-shelf="currentlyreading"] {
+  display: flex;
+  gap: 3vmin;
+  padding-top: 20vh;
+  margin: 0;
+  padding: 0;
+
+}
+
+ul[data-shelf="currentlyreading"] li {
+  max-width: 40vw; /* Maximum breedte van elk li-item */
+  flex: 1 0 30%; /* flex-grow: 1, flex-shrink: 0, flex-basis: 30% */
+  padding: 2em;
+  /* background-color: rgb(192, 205, 184); */
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row; /* Zorg ervoor dat de inhoud in een rij staat */
+  gap: 1em; /* Optionele ruimte tussen de elementen binnenin het li */
+
+
+  position: relative;
+  padding-top: 40px;
+
+  /* Glassmorphism */
+  background: 
+    linear-gradient(to right, rgb(18, 221, 146) var(--progress, 0%), white var(--progress, 0%)) top left / 100% 10px no-repeat,
+    rgba(255, 255, 255, 0.316); /* glass layer */
+
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2.1px);
+  -webkit-backdrop-filter: blur(6.1px);
+  border: 1px solid rgba(255, 255, 255, 0.46);
+}
+
+ul[data-shelf="currently reading"] li div:nth-of-type(2) {
+  max-width: 50vmin;
+}
+
+select {
+  appearance: none; /* verberg standaard pijltje */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url('./images/8666558_chevron_down_icon.svg') no-repeat right 20px center;
+  padding: 10px 50px 10px 30px;
+  border-radius: 30px;
+  background-color: white;
+  display: flex;
+  gap: 10px;
+  border: 1px solid #ccc;
+}
+
+.bookshelf-3d {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  gap: 20vmin;
+  min-height: 800px;
+  padding-top: 20vmin;
+  background-color: transparent;
+
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 50vw;
+  scroll-padding-right: 50vw;
+
+
+  /* margin-left: 200px; */
+  margin-right: 50vw;
+
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+}
+
+/* Verberg scrollbar voor Chrome, Safari en Opera */
+.bookshelf-3d::-webkit-scrollbar {
+  display: none;
+}
+
+.bookshelf-3d::after {
+  content: "";
+  flex: 0 0 110vmin; /* laatste boek kan hierdoor in het midden komen */
+}
+
+.bookshelf-3d::before {
+  content: "";
+  flex: 10vmin 0 0; /* laatste boek kan hierdoor in het midden komen */
+}
+
+#edit-goal-button {
+  background-color: transparent;
+  border: black solid 1px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  transition: ease-in .3s;
+}
+
+#edit-goal-button:hover {
+  background-color: black;
+  border: black solid 1px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  color: white;
+}
+
+
+.edit-goal-button {
+  background-color: transparent;
+  border: black solid 1px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  transition: ease-in .3s;
+}
+
+.edit-goal-button:hover {
+  background-color: black;
+  border: black solid 1px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  color: white;
+}
+
+.stats-header {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+
+}
+
+
+.book-container {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  perspective: 600px;
+
+  width: 100%;
+  transform-origin: right;
+  transition: transform 1s ease, margin 1s ease;
+  border-radius: 10px;
+  /* padding: 2vmin; */
+  scroll-margin: 0 5vmin;
+
+}
+
+
+
+.book {
+  width: 125px;
+  height: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateY(80deg);
+  transition: 1s ease;
+}
+
+
+.book > :first-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 325px;
+  transform: translateZ(30px);
+  background-color: #01060f;
+  border-radius: 0 2px 2px 0;
+  box-shadow: 5px 5px 20px #666;
+}
+
+.book-spine {
+  position: absolute;
+  content: ' ';
+  background-color: blue;
+  display: flex;
+  justify-content: center;
+  color: white;
+  align-items: center;
+  /* left: 0;
+  top: 0px; */
+  width: 58px;
+  font-size: 12px;
+  writing-mode: vertical-rl;
+  height: 325px;
+  transform: translateX(-28px) rotateY(-90deg);
+  background: black;
+}
+
+.book::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: ' ';
+  width: 200px;
+  height: 325px;
+  transform: translateZ(-30px);
+  background-color: #01060f;
+  border-radius: 0 2px 2px 0;
+  box-shadow: -10px 0 50px 10px #666;
+}
+
+.book-container.highlight-middle {
+  transform: scale(1.5);
+  /* margin: 0 10vmin; */
+}
+
+.book-container.highlight-middle .book{
+  /* outline: 4px solid orange;
+  outline-offset: -4px; */
+
+  transform: rotateY(-7deg);
+}
+
+.bookshelves {
+  margin-top: 10vmin;
+  margin-bottom: 10vmin;
+}
+
+/* keyframe animatie voor bredere in frame */
+
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+.modal-content {
+  position: relative;
+  background: white;
+  padding: 5%;
+  border-radius: 8px;
+  max-width: 50vw;
+  min-width: 30vw;
+  min-height: 500px;
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10%;
+}
+
+.modal-content h2 {
+  padding: 0;
+  margin: 0;
+  padding-bottom: .5em;
+}
+
+#close-modal {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  padding: 10px 20px;
+  background-color: transparent;
+  border: black solid 1px;
+  border-radius: 30px;
+  transition: ease-in .3s;
+}
+
+#close-modal:hover {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  padding: 10px 20px;
+  background-color: black;
+  color: white;
+  border: black solid 1px;
+  border-radius: 30px;
+  transition: ease-in .3s;
+}
+
+.modal-info select {
+  margin-top: 1em;
+}
+
+/* goal */
+.stats {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  padding: 6rem 10rem;
+  gap: 3vmin;
+  flex-wrap: wrap;
+}
+
+.book-count {
+  background-color: black; /* Kies een kleur voor de cirkel */
+  color: white; /* Tekstkleur */
+  border-radius: 50%; /* Maakt het rond */
+  padding: 10px 15px; /* Ruimte rondom de tekst */
+  font-size: 14px; /* Pas het lettertype aan */
+  margin-left: 10px; /* Plaatst de cirkel een beetje naar rechts van het kopje */
+  vertical-align: middle; /* Zorgt ervoor dat de cirkel goed uitgelijnd is met de tekst */
+}
+
+.goal-container {
+  min-height: 440px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 7vmin;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* zachte lichte schaduw */
+}
+
+.genres-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 7vmin;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* zachte lichte schaduw */
+  min-height: 440px;
+}
+
+.author-container {
+  min-height: 440px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 7vmin;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* zachte lichte schaduw */
+}
+
+#progressRing {
+  width: 100%;
+  height: 100%;
+  max-width: 200px;
+  max-height: 200px;
+}
+
+#genreChart {
+  width: 100%;
+  height: 100%;
+  max-width: 900px;
+  max-height: 400px;
+}
+
+#progressRing {
+  visibility: visible;
+}
+
+.background-circle {
+  fill: none;
+  stroke: black;
+  stroke-width: 8;
+}
+
+.progress-text {
+  position: absolute;
+  /* top: 35%; */
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
+  font-size: 16px;
+  font-weight: bold;
+}
+
+button {
+  margin-top: 15px;
+}
+
+.goal-form {
+  margin-top: 20px;
+}
+
+
+.back-button {
+  display: inline-block;
+  margin-bottom: 2rem;
+  text-decoration: none;
+  color: black;
+  border: 1px solid black;
+  border-radius: 30px;
+  padding: 10px 20px;
+  margin-left: 10rem;
+
+}
+
+
+
+/* detailssssss */
+
+
+.details-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  padding: 2rem 10%;
+}
+
+
+.details-section > a {
+  text-decoration: none;
+  color: black;
+  width: fit-content;
+  top: 5%;
+  right: 5%;
+  padding: 10px 20px;
+  background-color: transparent;
+  border: black solid 1px;
+  border-radius: 30px;
+  transition: ease-in .3s;
+}
+
+
+
+.details-section > a:hover {
+  text-decoration: none;
+  color: white;
+  width: fit-content;
+  top: 5%;
+  right: 5%;
+  padding: 10px 20px;
+  background-color: black;
+  border: black solid 1px;
+  border-radius: 30px;
+  transition: ease-in .3s;
+}
+
+
+.ul-search {
+  display: flex;
+  margin-top: 1em;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  width: auto;
+  gap: 5vmin;
+  /* background-color: white; */
+  padding: 5vmin;
+  padding-left: 10rem;
+  border-radius: 10px;
+  max-height: 90vh;
+  margin-bottom: 10vh;
+  margin-top: 10vh;
+}
+
+
+.ul-search li {
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;
+}
+
+.ul-search li select {
+  margin-top: 1em;
+}
+
+
+.add-to-shelf-button {
+  border: none;
+  border-bottom: 1px solid transparent;
+  background-color: transparent;  
+  color: black;
+  transition: ease-in .3s;
+}
+
+.add-to-shelf-button:hover {
+  border-bottom: 1px solid black;
+  background-color: transparent;  
+  color: black;
+  padding-bottom: 3px;
+}
+
+.move-button {
+  border: none;
+  border-bottom: 1px solid transparent;
+  background-color: transparent;  
+  color: black;
+  transition: ease-in .3s;
+}
+
+.move-button:hover {
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: transparent;  
+  color: black;
+  transition: ease-in .3s;
+}
+
+.details-content{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-top: 1rem;
+  gap: 2em;
+}
+
+.details-content div:first-of-type img{
+  width: 16vw;
+  border-radius: 10px;
+}
+
+.details-content div:last-of-type{
+  width: 100%;
+  max-width: 60vw;
+}
+
+.details-content div:last-of-type h2{
+  margin:0;
+  padding: 0;
+  margin-bottom: .2em;
+}
+
+.details-content div:last-of-type h3{
+  font-weight: 400;
+  font-size: 1.2em;
+  margin-bottom: 2em;
+}
+
+
+form input[type="number"] {
+  padding: 8px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 200px;
+  margin-bottom: 10px;
+}
+
+form button {
+  background-color: transparent;
+  border: black solid 1px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  transition: ease-in .3s;
+}
+
+form button:hover {
+  background-color: black;
+  color: white;
+}
+
+/* Voortgangsbalk */
+progress {
+  width: 100%;
+  height: 20px;
+  margin-top: 10px;
+  border-radius: 10px;
+  appearance: none;
+}
+
+progress::-webkit-progress-bar {
+  background-color: white;
+  border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+  background-color: rgb(18, 221, 146);
+  border-radius: 10px;
+}
+
+.similar-books {
+  margin-top: 10vh;
+}
+
+.similar-books ul {
+  width: 100vw;
+  gap: 4vmin;
+}
+
+.similar-books ul li {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 350px;
+}
+
+.similar-books ul li img {
+  height: 300px;
+  width: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}

@@ -1,0 +1,87 @@
+{% layout "server/layouts/base.liquid" %}
+
+{% block content %}
+
+<section class="details-section">
+  <a href="/" class="btn btn-primary">Terug naar home</a>
+</section>
+
+<section class="details-section">
+  <div>
+    {% if shelf == "currentlyReading" and book.volumeInfo.pageCount %}
+      <form action="/update-progress" method="POST">
+        <input type="hidden" name="id" value="{{ book.id }}">
+        <label for="currentPage">Huidige pagina:</label>
+        <input type="number" name="currentPage" min="0" max="{{ book.volumeInfo.pageCount }}" value="{{ currentPage }}">
+        <button type="submit">Opslaan</button>
+      </form>
+
+      {% assign totalPages = book.volumeInfo.pageCount %}
+      <p>Je hebt {{ currentPage }} van de {{ totalPages }} pagina's gelezen ({{ currentPage | divided_by: totalPages | times: 100.0 | round }}%).</p>
+      <progress value="{{ currentPage }}" max="{{ totalPages }}"></progress>
+
+    {% else %}
+    <form action="/move-book" method="POST" class="move-book-form">
+    <input type="hidden" name="book[id]" value="{{ book.id }}">
+    <input type="hidden" name="book[title]" value="{{ book.title }}">
+    <input type="hidden" name="book[authors]" value="{{ book.authors }}">
+    <input type="hidden" name="book[thumbnail]" value="{{ book.thumbnail }}">
+    <input type="hidden" name="fromShelf" value="{{ shelf }}">
+
+    <select name="toShelf" onchange="this.form.querySelector('.move-button').style.display = (this.value !== '{{ shelf.name }}') ? 'inline-block' : 'none';">
+      {% for option in shelfOptions %}
+        {% if option != shelf.name %}
+          <option value="{{ option }}">{{ option | capitalize }}</option>
+        {% else %}
+          <option value="{{ option }}" selected>{{ option | capitalize }}</option>
+        {% endif %}
+      {% endfor %}
+      <option value="remove">Verwijder</option>
+    </select>
+
+    <button type="submit" class="move-button" style="display: none;">Verplaats</button>
+</form>
+    {% endif %}
+  </div>
+
+  <div class="details-content">
+    <div>
+      {% if book.volumeInfo.imageLinks %}
+        <img src="{{ book.volumeInfo.imageLinks.thumbnail }}" alt="Book cover">
+      {% endif %}
+    </div>
+
+    <div>
+      <h2>{{ book.volumeInfo.title }}</h2>
+      {% if book.volumeInfo.authors %}
+        <h3>
+          {% for author in book.volumeInfo.authors %}
+            {{ author }}{% unless forloop.last %}, {% endunless %}
+          {% endfor %}
+        </h3>
+      {% endif %}
+  
+      <p>{{ book.volumeInfo.description }}</p>
+    </div>
+  </div>
+
+  {% if similarBooks.size > 0 %}
+    <section class="similar-books">
+      <h3>Meer van deze auteur</h3>
+      <ul>
+        {% for similarBook in similarBooks %}
+          <li>
+            {% if similarBook.volumeInfo.imageLinks %}
+              <a href="/book/{{ similarBook.id }}">
+                <img src="{{ similarBook.volumeInfo.imageLinks.thumbnail }}" alt="{{ similarBook.volumeInfo.title }} cover">
+              </a>
+            {% endif %}
+            <p>{{ similarBook.volumeInfo.title }}</p>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+</section>
+
+{% endblock %}
