@@ -1,15 +1,6 @@
 {
   "currentlyReading": [
     {
-      "id": "G5tgDQAAQBAJ",
-      "title": "Tower of Dawn",
-      "authors": "Sarah J. Maas",
-      "thumbnail": "http://books.google.com/books/content?id=G5tgDQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-      "pageCount": 432,
-      "dateRead": null,
-      "currentPage": 120
-    },
-    {
       "id": "ZhZjCwAAQBAJ",
       "title": "Empire of Storms",
       "authors": "Sarah J. Maas",
@@ -24,6 +15,14 @@
       "title": "Storm",
       "authors": "Lucinda Riley",
       "thumbnail": "http://books.google.com/books/content?id=ceRIDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+      "pageCount": 0,
+      "dateRead": null
+    },
+    {
+      "id": "G5tgDQAAQBAJ",
+      "title": "Tower of Dawn",
+      "authors": "Sarah J. Maas",
+      "thumbnail": "http://books.google.com/books/content?id=G5tgDQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
       "pageCount": 0,
       "dateRead": null
     }
