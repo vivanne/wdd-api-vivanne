@@ -13,7 +13,7 @@
         <input type="hidden" name="id" value="{{ book.id }}">
         <label for="currentPage">Huidige pagina:</label>
         <input type="number" name="currentPage" min="0" max="{{ book.volumeInfo.pageCount }}" value="{{ currentPage }}">
-        <button type="submit">Opslaan</button>
+        <button type="submit" class="update-page">Opslaan</button>
       </form>
 
       {% assign totalPages = book.volumeInfo.pageCount %}

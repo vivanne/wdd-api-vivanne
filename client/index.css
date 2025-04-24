@@ -621,7 +621,7 @@ form input[type="number"] {
   margin-bottom: 10px;
 }
 
-form button {
+.update-page {
   background-color: transparent;
   border: black solid 1px;
   padding: 10px 20px;
